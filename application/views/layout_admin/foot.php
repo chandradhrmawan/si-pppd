@@ -5,7 +5,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2020 SI-KOPMIL.</strong> All rights
+    <strong>Copyright &copy; 2022 SI-PPPD.</strong> All rights
     reserved.
   </footer>
 

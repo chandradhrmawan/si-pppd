@@ -1,4 +1,3 @@
-<?php error_reporting(0) ?>
 <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
@@ -7,14 +6,14 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3><?=$jml_sewa?></h3>
+              <h3><?=$jml_tugas?></h3>
 
               <p>Jumlah Surat Tugas</p>
             </div>
             <div class="icon">
               <i class="ion ion-android-clipboard"></i>
             </div>
-            <a href="<?=base_url()?>transaksi/Sewa" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?=base_url()?>transaksi/Tugas" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -22,14 +21,14 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3><?=$jml_kendaraan?><sup style="font-size: 20px"></sup></h3>
+              <h3><?=$jml_kegiatan?><sup style="font-size: 20px"></sup></h3>
 
               <p>Jumlah Kegiata Aktif</p>
             </div>
             <div class="icon">
               <i class="ion ion-android-car"></i>
             </div>
-            <a href="<?=base_url()?>master/Kendaraan" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?=base_url()?>transaksi/Kegiatan" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -37,32 +36,16 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3><?=$jml_users?></h3>
+              <h3><?=$jml_pelanggaran?></h3>
 
               <p>Jumlah Pelanggaran</p>
             </div>
             <div class="icon">
               <i class="ion ion-android-contacts"></i>
             </div>
-            <a href="<?=base_url()?>master/Users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?=base_url()?>transaksi/Pelanggaran" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <!-- <div class="col-lg-3 col-xs-6"> -->
-          <!-- small box -->
-          <!-- <div class="small-box bg-red"> -->
-            <!-- <div class="inner"> -->
-              <!-- <h3>Rp. <?=number_format($jml_service,2)?></h3> -->
-
-              <!-- <p>Total Pengeluaran Service</p> -->
-            <!-- </div> -->
-            <!-- <div class="icon"> -->
-              <!-- <i class="ion ion-calculator"></i> -->
-            <!-- </div> -->
-            <!-- <a href="<?=base_url()?>transaksi/Service" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
-          <!-- </div> -->
-        <!-- </div> -->
-        <!-- ./col -->
       </div>
       <!-- /.row -->
       <!-- Main row -->
@@ -152,7 +135,7 @@ const gantiTahun = (tahun) => {
   $.ajax({
     url : "<?php echo base_url() ?>main/listData",
     type: "POST",
-    data: {"data":tahun},
+    data: {"tahun":tahun},
     dataType : "json",
     success: function(data)
     { 

@@ -392,6 +392,61 @@ class Transaksi_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function getReportPelanggaran($where)
+	{
+		$this->db->select("a.id_pelanggaran,
+		a.id_kegiatan,
+		b.jenis_kegiatan,
+		b.tanggal_kegiatan, 
+		c.id_surat_tugas,
+		c.nomor_surat_tugas, 
+		a.no_ktp,
+		a.nama,
+		a.alamat,
+		a.pendidikan,
+		a.perkerjaan,
+		a.status_kawin,
+		a.jenis_pelanggaran,
+		d.nm_pelanggaran,
+		a.kd_tindakan,
+		e.nm_tindakan,
+		a.tanggal_pelanggaran,
+		a.lokasi,
+		a.waktu_rekam");
+		$this->db->from("tx_pelanggaran a");
+		$this->db->join("tx_kegiatan b","a.id_kegiatan = b.id_kegiatan");
+		$this->db->join("tx_surat_tugas c","c.id_surat_tugas = b.id_surat_tugas");
+		$this->db->join("mst_pelanggaran d","d.kd_pelanggaran = a.jenis_pelanggaran");
+		$this->db->join("mst_tindakan e","e.kd_tindakan = a.kd_tindakan");
+		if(!empty($where['tgl_awal']) && !empty($where['tgl_akhir'])){
+			$this->db->where('a.tanggal_pelanggaran >= ', $where['tgl_awal']);
+			$this->db->where('a.tanggal_pelanggaran <= ', $where['tgl_akhir']);	
+		}
+		$this->db->order_by("a.id_pelanggaran","desc");
+		return $this->db->get()->result();
+	}
+
+	public function getReportKegiatan($where)
+	{
+		$this->db->select("a.id_kegiatan,
+		DATE_FORMAT(a.tanggal_kegiatan,'%Y-%m-%d') AS tanggal_kegiatan ,
+		a.id_surat_tugas,
+		b.nomor_surat_tugas, 
+		a.jenis_kegiatan,
+		a.lokasi,
+		a.tindak_lanjut,
+		a.keterangan,
+		a.waktu_simpan");
+		$this->db->from("tx_kegiatan a");
+		$this->db->join("tx_surat_tugas b","a.id_surat_tugas = b.id_surat_tugas");
+		if(!empty($where['tgl_awal']) && !empty($where['tgl_akhir'])){
+			$this->db->where('a.tanggal_kegiatan >= ', $where['tgl_awal']);
+			$this->db->where('a.tanggal_kegiatan <= ', $where['tgl_akhir']);	
+		}
+		$this->db->order_by("a.id_kegiatan","desc");
+		return $this->db->get()->result();
+	}
+
 	public function getDataHdrService($id_hdr_service)
 	{
 		$this->db->select("*");
@@ -560,20 +615,20 @@ class Transaksi_model extends CI_Model {
 	public function getBarChartData($year)
 	{
 		$sql = "SELECT 
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 1 AND YEAR(tgl_sewa) = 2020) as JANUARI,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 2 AND YEAR(tgl_sewa) = 2020) as FEBRUARI,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 3 AND YEAR(tgl_sewa) = 2020) as MARET,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 4 AND YEAR(tgl_sewa) = 2020) as APRIL,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 5 AND YEAR(tgl_sewa) = 2020) as MEI,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 6 AND YEAR(tgl_sewa) = 2020) as JUNI,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 7 AND YEAR(tgl_sewa) = 2020) as JULI,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 8 AND YEAR(tgl_sewa) = 2020) as AGUSTUS,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 9 AND YEAR(tgl_sewa) = 2020) as SEPTEMBER,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 10 AND YEAR(tgl_sewa) = 2020) as OKTOBER,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 11 AND YEAR(tgl_sewa) = 2020) as NOVEMBER,
-				(SELECT COUNT(id_sewa) from tx_sewa where MONTH(tgl_sewa) = 12 AND YEAR(tgl_sewa) = 2020) as DESEMBER
-			FROM
-				DUAL";
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 1 AND YEAR(tanggal_pelanggaran) = '".$year."') as JANUARI,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 2 AND YEAR(tanggal_pelanggaran) = '".$year."') as FEBRUARI,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 3 AND YEAR(tanggal_pelanggaran) = '".$year."') as MARET,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 4 AND YEAR(tanggal_pelanggaran) = '".$year."') as APRIL,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 5 AND YEAR(tanggal_pelanggaran) = '".$year."') as MEI,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 6 AND YEAR(tanggal_pelanggaran) = '".$year."') as JUNI,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 7 AND YEAR(tanggal_pelanggaran) = '".$year."') as JULI,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 8 AND YEAR(tanggal_pelanggaran) = '".$year."') as AGUSTUS,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 9 AND YEAR(tanggal_pelanggaran) = '".$year."') as SEPTEMBER,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 10 AND YEAR(tanggal_pelanggaran) = '".$year."') as OKTOBER,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 11 AND YEAR(tanggal_pelanggaran) = '".$year."') as NOVEMBER,
+			(SELECT COUNT(id_pelanggaran) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 12 AND YEAR(tanggal_pelanggaran) = '".$year."') as DESEMBER
+		FROM
+			DUAL";
 		return $this->db->query($sql)->row();
 	}
 
@@ -628,6 +683,28 @@ class Transaksi_model extends CI_Model {
 		a.id_user
 		");
 		$this->db->from("tx_surat_tugas a");
+		$this->db->order_by("a.waktu_rekam","desc");
+		return $this->db->get()->result();
+	}
+
+	public function getReportTugas($where)
+	{
+		$this->db->select("a.id_surat_tugas ,
+		a.nomor_surat_tugas,
+		a.dasar_kegiatan as dasar_kegiatan_full,
+		CONCAT(SUBSTR(dasar_kegiatan, 1, 50),' ......') AS dasar_kegiatan,
+		a.tujuan_kegiatan as tujuan_kegiatan_full,
+		CONCAT(SUBSTR(tujuan_kegiatan, 1, 50),'......') AS tujuan_kegiatan,
+		a.is_active ,
+		a.waktu_rekam ,
+		a.waktu_update ,
+		a.id_user
+		");
+		$this->db->from("tx_surat_tugas a");
+		if(!empty($where['tgl_awal']) && !empty($where['tgl_akhir'])){
+			$this->db->where('a.waktu_rekam >= ', $where['tgl_awal']);
+			$this->db->where('a.waktu_rekam <= ', $where['tgl_akhir']);	
+		}
 		$this->db->order_by("a.waktu_rekam","desc");
 		return $this->db->get()->result();
 	}
@@ -837,6 +914,62 @@ class Transaksi_model extends CI_Model {
 		$this->db->from('mst_tindakan');
 		$this->db->where('is_active',true);
 		return $this->db->get()->result();
+	}
+
+	public function getByBulan($id_kegiatan,$bulan,$tahun)
+	{
+		return $this->db->query('select
+		COUNT(id_pelanggaran) as jml
+		from
+		tx_pelanggaran
+		where
+		month(tanggal_pelanggaran) = "'.$bulan.'"
+		and year(tanggal_pelanggaran) = "'.$tahun.'"
+		and id_kegiatan = "'.$id_kegiatan.'"')->row();
+	}
+
+	public function getByKegiatan($id_kegiatan,$tahun)
+	{
+		return $this->db->query('select
+		COUNT(id_pelanggaran) as jml
+		from
+		tx_pelanggaran
+		where
+		year(tanggal_pelanggaran) = "'.$tahun.'"
+		and id_kegiatan = "'.$id_kegiatan.'"')->row();
+	}
+
+	public function getByTindakan($id_kegiatan,$kd_tindakan)
+	{
+		return $this->db->query('select
+			COUNT(*) as jml
+		from
+			tx_pelanggaran
+		where
+			kd_tindakan = "'.$kd_tindakan.'"
+			and
+			id_kegiatan  = "'.$id_kegiatan.'"')->row();
+	}
+	
+	public function getTotalBulan($bulan,$tahun)
+	{
+		return $this->db->query('select
+		COUNT(id_pelanggaran) as jml
+		from
+		tx_pelanggaran
+		where
+		month(tanggal_pelanggaran) = "'.$bulan.'"
+		and year(tanggal_pelanggaran) = "'.$tahun.'"')->row();
+	}
+
+	public function getTotalTindakan($kd_tindakan)
+	{
+		return $this->db->query('select
+			COUNT(*) as jml
+		from
+			tx_pelanggaran
+		where
+			kd_tindakan = "'.$kd_tindakan.'"')->row();
 	}
 	
 }

@@ -35,18 +35,16 @@ class Main extends CI_Controller {
 
 	public function dashboard()
 	{	
-		$year  					= date('Y');
-		$data['breadcump'] 		= "Dashboard";
-		$data['title_page']		= "Dashboard";
-		$data['content_view']	= "main/index";
-		// $data['tahun'] 			= $this->master_model->getTahunTransaksi();
-		// $data['chart_data'] 	= $this->gantiTahun($year);
-		// $data['pie_tahun'] 	 	= $this->dataTahun();
-		// $data['pie_jenis'] 	 	= $this->dataJenis();
-		// $data['jml_sewa'] 		= $this->master_model->jmlData('tx_sewa');
-		// $data['jml_kendaraan'] 	= $this->master_model->jmlData('mst_kendaraan');
-		// $data['jml_users'] 		= $this->master_model->jmlData('mst_users');
-		// $data['jml_service'] 	= $this->master_model->TotalService()->total;
+		$year  					 = date('Y');
+		$data['breadcump'] 		 = "Dashboard";
+		$data['title_page']		 = "Dashboard";
+		$data['content_view']	 = "main/index";
+		$data['tahun'] 			 = $this->master_model->getTahunTransaksi();
+		$data['chart_data'] 	 = $this->gantiTahun($year);
+		// debux($data['chart_data']);die;
+		$data['jml_tugas'] 		 = $this->master_model->jmlData('tx_surat_tugas');
+		$data['jml_kegiatan'] 	 = $this->master_model->jmlData('tx_kegiatan');
+		$data['jml_pelanggaran'] = $this->master_model->jmlData('tx_pelanggaran');
 		$this->load->view('layout_admin/index',$data);
 	}
 

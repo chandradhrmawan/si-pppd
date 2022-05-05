@@ -49,7 +49,7 @@ class Master_model extends CI_Model {
 
 	public function getTahunTransaksi()
 	{
-		$sql = "SELECT DISTINCT(YEAR(tgl_sewa)) as tahun from tx_sewa";
+		$sql = "SELECT DISTINCT(YEAR(tanggal_pelanggaran)) as tahun from tx_pelanggaran";
 		return $this->db->query($sql)->result();
 	}
 	
