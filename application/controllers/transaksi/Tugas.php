@@ -60,4 +60,11 @@ class Tugas extends CI_Controller {
 		return $result; 
 	}
 
+	public function cetakSurat($id)
+	{
+		$data['dasar'] = $this->transaksi_model->findDataTugas($id);
+		$data['dasar']->users = $this->_getUsersInId(json_decode($data['dasar']->id_user));
+		$this->load->view('surat/tugas',$data);
+	}
+
 }

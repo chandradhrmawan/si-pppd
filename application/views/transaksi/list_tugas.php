@@ -58,7 +58,8 @@
                         <td><?=$value->tujuan_kegiatan?></td>
                         <td><?=view_date_hi($value->waktu_rekam)?>
                         <td style="text-align:center;"><?=$status_sewa?></td>
-                        <td style="text-align:center;">
+                        <td style="text-align:center; width:280px;">
+                          <button class="btn btn-default btn-flat btn-sm" type="button" onclick="modalCetak(<?=$value->id_surat_tugas?>)">Detail <span class="fa fa-file"></span></button>
                           <button class="btn btn-info btn-flat btn-sm" type="button" onclick="modalDetail(<?=$value->id_surat_tugas?>)">Detail <span class="fa fa-eye"></span></button>
                           <button class="btn btn-primary btn-flat btn-sm" type="button" onclick="modalEdit(<?=$value->id_surat_tugas?>)">Ubah <span class="fa fa-edit"></span></button>
                           <button class="btn btn-danger btn-flat btn-sm" type="button" onclick="modalDelete(<?=$value->id_surat_tugas?>)">Hapus <span class="fa fa-trash"></span></button>
@@ -460,9 +461,13 @@
       });
      }
 
+    const modalCetak = (id) => {
+      window.open('<?=base_url()?>transaksi/Tugas/cetakSurat/'+id, '_blank');
+    }
+
     const modalDetail = (id) => {
         $('#modal_detail').modal('show');
-         $('.modal-title').text('Detail Data'); // Set Title to Bootstrap modal title
+        $('.modal-title').text('Detail Data'); // Set Title to Bootstrap modal title
 
         $.ajax({
           url : "<?php echo site_url('transaksi/Tugas/find')?>/" + id,
