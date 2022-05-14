@@ -73,7 +73,7 @@
         <hr/>
         <p style="text-align:center;"><b><u>SURAT PERINTAH</u></b>
         <br/>
-        Nomor : 001/002 - Trantib</p>
+        Nomor : <?=$dasar->nomor_surat_tugas?></p>
         <table border="0" cellpading="0" cellspacing="0" width="80%">
             <tr>
                 <td style="width: 10%;" colspan="4">Dasar</td>

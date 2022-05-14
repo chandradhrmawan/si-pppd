@@ -85,7 +85,7 @@
         </div>
         </div>
 
-       <!-- <div class="col-md-6">
+       <div class="col-md-12">
         <div class="box box-info">
             <div class="box-header">
               <div class="pull-right box-tools">
@@ -95,10 +95,10 @@
               </div>
             </div>
             <div class="box-body pad">
-               <div id="container_pie1"></div>  
+               <div id="container_bar2"></div>  
               </div>
         </div>
-        </div> -->
+        </div> 
 
         <!-- <div class="col-md-6">
         <div class="box box-info">
@@ -113,9 +113,9 @@
                <div id="container_pie2"></div>  
               </div>
         </div>
-        </div> -->
+        </div>
       </div>
-      <!-- /.row (main row) -->
+      /.row (main row) -->
 
 </section>
 
@@ -125,6 +125,7 @@
 
 $(document).ready(function() { 
    bar_chart();
+   bar_chart2();
   //  pie_tahun();
   //  pie_jenis();
    $('.highcharts-credits').hide();
@@ -155,6 +156,8 @@ const bar_chart = (data="") => {
   data = (data == "") ? <?php echo json_encode($chart_data) ?> : data ;
   // bar chart
   // Create the chart
+
+  console.log(data)
 
   Highcharts.setOptions({
       chart: {
@@ -216,86 +219,57 @@ const bar_chart = (data="") => {
   $('.highcharts-credits').hide();
 }
 
-/* const pie_tahun = (data = "") => {
-
-  data = (data == "") ? <?php echo json_encode($pie_tahun) ?> : data ;
-
-  Highcharts.chart('container_pie1', {
-      chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
-      },
-      title: {
-          text: 'Chart Kendaraan Berdasarkan Tahun Produksi'
-      },
-      tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      accessibility: {
-          point: {
-              valueSuffix: '%'
-          }
-      },
-      plotOptions: {
-          pie: {
-              allowPointSelect: true,
-              cursor: 'pointer',
-              dataLabels: {
-                  enabled: false
-              },
-              showInLegend: true
-          }
-      },
-      series: [{
-          name: 'Presentase',
-          colorByPoint: true,
-          data: data
-      }]
+const bar_chart2 = (data=null) => {
+  Highcharts.chart('container_bar2', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Statistik Penerbitan'
+    },
+    subtitle: {
+        text: 'Data Penerbitan'
+    },
+    xAxis: {
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Jumlah'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.f} Orang</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series:<?=$chart_data2?>
   });
-  $('.highcharts-credits').hide();
 }
 
-const pie_jenis = (data = "") => {
-
-   data = (data == "") ? <?php echo json_encode($pie_jenis) ?> : data ;
-
-  Highcharts.chart('container_pie2', {
-      chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
-      },
-      title: {
-          text: 'Chart Kendaraan Berdasarkan Tipe Kendaraan'
-      },
-      tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      accessibility: {
-          point: {
-              valueSuffix: '%'
-          }
-      },
-      plotOptions: {
-          pie: {
-              allowPointSelect: true,
-              cursor: 'pointer',
-              dataLabels: {
-                  enabled: false
-              },
-              showInLegend: true
-          }
-      },
-      series: [{
-          name: 'Brands',
-          colorByPoint: true,
-          data: data
-      }]
-  });
-  $('.highcharts-credits').hide();
-} */
 
 </script>

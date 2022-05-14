@@ -128,7 +128,8 @@
             <div class="form-group">
               <label class="control-label col-md-2">Tindak Lanjut</label>
               <div class="col-md-9">
-                <input name="tindak_lanjut" id="tindak_lanjut" class="form-control" type="text">
+                <!-- <input name="tindak_lanjut" id="tindak_lanjut" class="form-control" type="text"> -->
+                <textarea id="tindak_lanjut" name="tindak_lanjut" rows="10" cols="80"></textarea>
               </div>
             </div>
 
@@ -165,6 +166,8 @@
         "processing": true, //Feature control the processing indicator.
         "serverSide": false //Feature control DataTables' server-side processing mode.
       });
+
+      CKEDITOR.replace('tindak_lanjut');
     });
 
     const add = () => {
@@ -173,6 +176,7 @@
       $('#modal_tambah').modal('show'); // show bootstrap modal
       $('.modal-title').text('Tambah Kegiatan'); // Set Title to Bootstrap modal title
       $('#type').val("add");
+      CKEDITOR.instances['tindak_lanjut'].setData("");
     }
 
     const modalEdit = (id) => {
@@ -189,7 +193,8 @@
       document.getElementById("tanggal_kegiatan").value = findKegiatan['tanggal_kegiatan'];
       document.getElementById("jenis_kegiatan").value = findKegiatan['jenis_kegiatan'];
       document.getElementById("lokasi").value = findKegiatan['lokasi'];
-      document.getElementById("tindak_lanjut").value = findKegiatan['tindak_lanjut'];
+      // document.getElementById("tindak_lanjut").value = findKegiatan['tindak_lanjut'];
+      CKEDITOR.instances['tindak_lanjut'].setData(findKegiatan['tindak_lanjut']);
     }
 
     const modalDelete = (id) => {
@@ -273,7 +278,7 @@
           formData.append('tanggal_kegiatan', document.getElementById("tanggal_kegiatan").value);
           formData.append('jenis_kegiatan', document.getElementById("jenis_kegiatan").value);
           formData.append('lokasi', document.getElementById("lokasi").value);
-          formData.append('tindak_lanjut', document.getElementById("tindak_lanjut").value);
+          formData.append('tindak_lanjut', CKEDITOR.instances.tindak_lanjut.getData());
           if(document.getElementById("keterangan").files[0] != undefined){
             formData.append('keterangan', document.getElementById("keterangan").files[0]); 
           }

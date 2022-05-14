@@ -31,6 +31,12 @@ class Kegiatan extends CI_Controller {
         $content = "";
 		foreach ($result as $key => $value) {
 			$no = $key+1;
+			$img = "";
+			if($value->keterangan == null || $value->keterangan == ''){
+				$img = '<img src="'.base_url().'uploads/not_found.jpg" width="50" height="50">';
+			  }else{
+				$img = '<a href="'.base_url().'uploads/kegiatan/'.$value->keterangan.'" target="__blank"><img src="'.base_url().'uploads/kegiatan/'.$value->keterangan.'" width="50" height="50"></a>';
+			  }
 			$content .= "
 			<tr>
 				<td>$no</td>
@@ -39,6 +45,7 @@ class Kegiatan extends CI_Controller {
 				<td>$value->jenis_kegiatan</td>
 				<td>$value->lokasi</td>
 				<td>$value->tindak_lanjut</td>
+				<td>$img</td>
 			</tr>";
 		}
 
@@ -56,6 +63,7 @@ class Kegiatan extends CI_Controller {
                 <th>Jenis Kegiatan</th>
                 <th>Lokasi</th>
                 <th>Tindak Lanjut</th>
+				<th>Keterangan</th>
               </tr>
               </thead>
               <tbody>

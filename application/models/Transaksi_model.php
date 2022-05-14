@@ -632,6 +632,28 @@ class Transaksi_model extends CI_Model {
 		return $this->db->query($sql)->row();
 	}
 
+	public function getBarChartData2($year)
+	{
+		$sql = "SELECT
+			a.kd_tindakan,
+			a.nm_tindakan,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 1 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as JANUARI,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 2 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as FEBRUARI,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 3 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as MARET,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 4 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as APRIL,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 5 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as MEI,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 6 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as JUNI,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 7 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as JULI,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 8 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as AGUSTUS,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 9 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as SEPTEMBER,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 10 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as OKTOBER,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 11 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as NOVEMBER,
+			(select count(*) from tx_pelanggaran where MONTH(tanggal_pelanggaran) = 12 AND YEAR(tanggal_pelanggaran) = '".$year."' and kd_tindakan = a.kd_tindakan) as DESEMBER
+		from
+			mst_tindakan a";
+		return $this->db->query($sql)->result();
+	}
+
 	public function getChartKendaraan()
 	{
 		$sql = "SELECT

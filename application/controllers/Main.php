@@ -41,11 +41,35 @@ class Main extends CI_Controller {
 		$data['content_view']	 = "main/index";
 		$data['tahun'] 			 = $this->master_model->getTahunTransaksi();
 		$data['chart_data'] 	 = $this->gantiTahun($year);
-		// debux($data['chart_data']);die;
 		$data['jml_tugas'] 		 = $this->master_model->jmlData('tx_surat_tugas');
 		$data['jml_kegiatan'] 	 = $this->master_model->jmlData('tx_kegiatan');
 		$data['jml_pelanggaran'] = $this->master_model->jmlData('tx_pelanggaran');
+		$data['chart_data2']     = $this->_getChartData2($year);
 		$this->load->view('layout_admin/index',$data);
+	}
+
+	public function _getChartData2($year='2022')
+	{	
+		$result = [];
+		$resp = $this->transaksi_model->getBarChartData2($year);
+		foreach ($resp as $key => $value) {
+			$result[$key]['name'] = $value->nm_tindakan;
+			$result[$key]['data'] = [
+				(int)$value->JANUARI,
+				(int)$value->FEBRUARI,
+				(int)$value->MARET,
+				(int)$value->APRIL,
+				(int)$value->MEI,
+				(int)$value->JUNI,
+				(int)$value->JULI,
+				(int)$value->AGUSTUS,
+				(int)$value->SEPTEMBER,
+				(int)$value->OKTOBER,
+				(int)$value->NOVEMBER,
+				(int)$value->DESEMBER,
+			];
+		}
+		return json_encode($result);	
 	}
 
 	public function dashboardUser()
@@ -55,15 +79,15 @@ class Main extends CI_Controller {
 		$data['title_page']		= "Dashboard";
 		$data['content_view']	= "main/indexUser";
 		$this->load->view('layout_admin/index',$data);
-	}
-
-	public function dashboardSupir()
-	{
+	}	
+	
+		public function dashboardSupir()
+	{	
 		$year  					= date('Y');
 		$data['breadcump'] 		= "Dashboard";
 		$data['title_page']		= "Dashboard";
-		$data['content_view']	= "main/indexSupir";
-		$data['no_plat'] 		= @$this->transaksi_model->getTugasSupirByIdSupir($this->session->userdata('id_user'))->no_plat;
+		$data['conte	nt_view']	= "main/indexSupir";
+		$data['no_plat']	 		= @$this->transaksi_model->getTugasSupirByIdSupir($this->session->userdata('id_user'))->no_plat;
 		$this->load->view('layout_admin/index',$data);
 	}
 
