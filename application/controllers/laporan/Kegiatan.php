@@ -35,7 +35,7 @@ class Kegiatan extends CI_Controller {
 			if($value->keterangan == null || $value->keterangan == ''){
 				$img = '<img src="'.base_url().'uploads/not_found.jpg" width="50" height="50">';
 			  }else{
-				$img = '<a href="'.base_url().'uploads/kegiatan/'.$value->keterangan.'" target="__blank"><img src="'.base_url().'uploads/kegiatan/'.$value->keterangan.'" width="50" height="50"></a>';
+				$img = '<img src="'.base_url().'uploads/kegiatan/'.$value->keterangan.'" width="50" height="50">';
 			  }
 			$content .= "
 			<tr>
