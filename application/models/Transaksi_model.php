@@ -950,6 +950,18 @@ class Transaksi_model extends CI_Model {
 		and id_kegiatan = "'.$id_kegiatan.'"')->row();
 	}
 
+	public function getByBulanPelanggaran($kd_pelanggaran,$bulan,$tahun)
+	{
+		return $this->db->query('select
+		COUNT(*) as jml
+		from
+		tx_pelanggaran
+		where
+		month(tanggal_pelanggaran) = "'.$bulan.'"
+		and year(tanggal_pelanggaran) = "'.$tahun.'"
+		and jenis_pelanggaran = "'.$kd_pelanggaran.'"')->row();
+	}
+
 	public function getByKegiatan($id_kegiatan,$tahun)
 	{
 		return $this->db->query('select
@@ -959,6 +971,17 @@ class Transaksi_model extends CI_Model {
 		where
 		year(tanggal_pelanggaran) = "'.$tahun.'"
 		and id_kegiatan = "'.$id_kegiatan.'"')->row();
+	}
+
+	public function getByPelanggaran($kd_pelanggaran,$tahun)
+	{
+		return $this->db->query('select
+		COUNT(*) as jml
+		from
+		tx_pelanggaran
+		where
+		year(tanggal_pelanggaran) = "'.$tahun.'"
+		and jenis_pelanggaran = "'.$kd_pelanggaran.'"')->row();
 	}
 
 	public function getByTindakan($id_kegiatan,$kd_tindakan)
@@ -992,6 +1015,14 @@ class Transaksi_model extends CI_Model {
 			tx_pelanggaran
 		where
 			kd_tindakan = "'.$kd_tindakan.'"')->row();
+	}
+
+	public function getPelanggaranKegiatan()
+	{
+		return $this->db->query('select mp.kd_pelanggaran,mp.nm_pelanggaran from tx_pelanggaran tp
+		left join tx_kegiatan tk on tp.id_kegiatan  = tk.id_kegiatan
+		left join mst_pelanggaran mp on mp.kd_pelanggaran = tp.jenis_pelanggaran
+		group by mp.kd_pelanggaran,mp.nm_pelanggaran')->result();
 	}
 	
 }

@@ -96,7 +96,7 @@ class Pelanggaran extends CI_Controller {
 		$data['content_view']		= "laporan/rekap_pelanggaran";
         $data['ref_tindakan']       = $this->master_model->getAll('mst_tindakan');
 		$data['jml_tindakan']       = $this->master_model->jmlData('mst_tindakan');
-		$data['data_kegiatan']       = $this->master_model->getAll('tx_kegiatan');
+		$data['data_kegiatan'] = $this->transaksi_model->getPelanggaranKegiatan();
 		$this->load->view('layout_admin/index',$data);	
 	}
 
@@ -106,9 +106,21 @@ class Pelanggaran extends CI_Controller {
 		return $result->jml;
 	}
 
+	public function getByBulanPelanggaran($kd_pelanggaran,$bulan,$tahun=2022)
+	{
+		$result = $this->transaksi_model->getByBulanPelanggaran($kd_pelanggaran,$bulan,$tahun);
+		return $result->jml;
+	}
+
 	public function getByKegiatan($id_kegiatan,$tahun=2022)
 	{
 		$result = $this->transaksi_model->getByKegiatan($id_kegiatan,$tahun);
+		return $result->jml;
+	}
+
+	public function getByPelanggaran($kd_pelanggaran,$tahun=2022)
+	{
+		$result = $this->transaksi_model->getByPelanggaran($kd_pelanggaran,$tahun);
 		return $result->jml;
 	}
 

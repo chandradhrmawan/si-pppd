@@ -12,7 +12,7 @@ $CI = &get_instance();
             <thead>
             <tr>
                 <th rowspan="2" style="vertical-align: middle;text-align:center;">No</th>
-                <th rowspan="2" style="vertical-align: middle;text-align:center;">Jenis Kegiatan</th>
+                <th rowspan="2" style="vertical-align: middle;text-align:center;">Jenis Pelanggaran</th>
                 <th rowspan="2" style="vertical-align: middle;text-align:center;">JAN</th>
                 <th rowspan="2" style="vertical-align: middle;text-align:center;">FEB</th>
                 <th rowspan="2" style="vertical-align: middle;text-align:center;">MAR</th>
@@ -38,17 +38,17 @@ $CI = &get_instance();
               <?php 
               $totalKasus = 0;
               foreach ($data_kegiatan as $key => $value) {
-                $kasus = $CI->getByKegiatan($value->id_kegiatan);
+                $kasus = $CI->getByPelanggaran($value->kd_pelanggaran);
                 $totalKasus+=$kasus;
               ?>
                 <tr>
                   <td><?=$key+1?></td>
-                  <td><?=$value->jenis_kegiatan?></td>
+                  <td><?=$value->nm_pelanggaran?></td>
                   <?php 
                   for ($i=1; $i <=12; $i++) { 
                   ?>
                     <td>
-                      <?=$CI->getByBulan($value->id_kegiatan,$i)?>
+                      <?=$CI->getByBulanPelanggaran($value->kd_pelanggaran,$i)?>
                     </td>
                   <?php } ?>
                   <td>
@@ -56,7 +56,7 @@ $CI = &get_instance();
                   </td>
                   <?php 
                     foreach ($ref_tindakan as $key => $valuez) { 
-                    $tindakan = $CI->getByTindakan($value->id_kegiatan,$valuez->kd_tindakan);  
+                    $tindakan = $CI->getByTindakan($value->kd_pelanggaran,$valuez->kd_tindakan);  
                     ?>
                     <td>
                       <?=$tindakan?>
