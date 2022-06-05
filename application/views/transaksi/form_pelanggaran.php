@@ -123,6 +123,10 @@
 
     <script type="text/javascript">
 
+    const isEmpty = (str) => {
+      return (!str || str.length === 0 );
+    }
+
     const save = () => {
 
         let postData = {
@@ -138,6 +142,21 @@
             tanggal_pelanggaran : document.getElementById('tanggal_pelanggaran').value,
             lokasi : document.getElementById('lokasi').value
         }
+
+        let errMsg = []
+          for (const key in postData) {
+            if (postData.hasOwnProperty.call(postData, key)) {
+              console.log(`${key} : ${postData[key]}`)
+              if(isEmpty(postData[key])){
+                errMsg.push(`${key} : Tidak Boleh Kosong \n`)
+              }
+            }
+          }
+
+          if(errMsg.length > 0){
+            alert(errMsg);
+            return true
+          }
 
         url = "<?php echo site_url('transaksi/Pelanggaran/save')?>";
         $.ajax({

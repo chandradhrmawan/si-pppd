@@ -155,7 +155,7 @@
             <div class="form-group">
               <label class="control-label col-md-2">Nomor Surat</label>
               <div class="col-md-9">
-                <input name="nomor_surat_tugas" id="nomor_surat_tugas" class="form-control" type="text">
+                <input name="nomor_surat_tugas" id="nomor_surat_tugas" class="form-control" type="text" required="true">
               </div>
             </div>
 
@@ -164,7 +164,7 @@
               <div class="col-md-9">
                 <div class="box">
                   <div class="box-body pad">
-                      <textarea id="dasar_kegiatan" name="dasar_kegiatan" rows="10" cols="80"></textarea>
+                      <textarea id="dasar_kegiatan" name="dasar_kegiatan" rows="10" cols="80" required="true"></textarea>
                     </div>
                 </div>
               </div>
@@ -189,7 +189,7 @@
               <div class="col-md-9">
                 <div class="box">
                   <div class="box-body pad">
-                      <textarea id="tujuan_kegiatan" name="tujuan_kegiatan" rows="10" cols="80"></textarea>
+                      <textarea id="tujuan_kegiatan" name="tujuan_kegiatan" rows="10" cols="80" required="true"></textarea>
                     </div>
                 </div>
               </div>
@@ -625,6 +625,10 @@
       document.getElementById("jabatan").value = findUser['nm_jabatan'];
     }
 
+    const isEmpty = (str) => {
+      return (!str || str.length === 0 );
+    }
+
     const save = () => {
       swal({
         title: "Konfirmasi Simpan/Ubah Data",
@@ -667,6 +671,25 @@
 
           if(document.getElementById("type").value != "edit"){
             delete postData.id_surat_tugas
+          }
+
+          let errMsg = []
+          for (const key in postData) {
+            if (postData.hasOwnProperty.call(postData, key)) {
+              console.log(`${key} : ${postData[key]}`)
+              if(isEmpty(postData[key])){
+                errMsg.push(`${key} : Tidak Boleh Kosong \n`)
+              }
+            }
+          }
+
+          if(isEmpty(data_cheked)){
+            errMsg.push(`User : Tidak Boleh Kosong \n`)
+          }
+
+          if(errMsg.length > 0){
+            alert(errMsg);
+            return true
           }
 
           $.ajax({

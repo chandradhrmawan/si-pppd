@@ -179,6 +179,10 @@
       CKEDITOR.instances['tindak_lanjut'].setData("");
     }
 
+    const isEmpty = (str) => {
+      return (!str || str.length === 0 );
+    }
+
     const modalEdit = (id) => {
       save_method = 'edit';
       $('#form')[0].reset(); // reset form on modals
@@ -281,6 +285,32 @@
           formData.append('tindak_lanjut', CKEDITOR.instances.tindak_lanjut.getData());
           if(document.getElementById("keterangan").files[0] != undefined){
             formData.append('keterangan', document.getElementById("keterangan").files[0]); 
+          }
+
+          let errMsg = []
+          if(isEmpty(document.getElementById("id_surat_tugas").value)){
+            errMsg.push('Surat Tugas tidak boleh kosong \n')
+          }
+          
+          if(isEmpty(document.getElementById("tanggal_kegiatan").value)){
+            errMsg.push('Tanggal Kegiatan tidak boleh kosong \n')
+          }
+
+          if(isEmpty(document.getElementById("jenis_kegiatan").value)){
+            errMsg.push('Jenis Kegiatan tidak boleh kosong \n')
+          }
+
+          if(isEmpty(document.getElementById("lokasi").value)){
+            errMsg.push('Lokasi Kegiatan tidak boleh kosong \n')
+          }
+
+          if(isEmpty(CKEDITOR.instances.tindak_lanjut.getData())){
+            errMsg.push('Tindak Lanjut tidak boleh kosong \n')
+          }
+
+          if(errMsg.length > 0){
+            alert(errMsg);
+            return true
           }
 
           $.ajax({
