@@ -24,13 +24,14 @@ class Main extends CI_Controller {
 
 	public function isLogin()
 	{
-		if($this->session->userdata('id_role') == 1){
-			$this->dashboard();
-		}elseif($this->session->userdata('id_role') == 4){
-			$this->dashboardSupir();
-		}else{
-			$this->dashboardUser();
-		}
+		// if($this->session->userdata('id_role') == 1){
+		// 	$this->dashboard();
+		// }elseif($this->session->userdata('id_role') == 4){
+		// 	$this->dashboardSupir();
+		// }else{
+		// 	$this->dashboardUser();
+		// }
+		$this->dashboard();
 	}
 
 	public function dashboard()

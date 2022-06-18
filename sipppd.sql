@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2022 at 09:22 PM
+-- Generation Time: Jun 18, 2022 at 09:43 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -48,12 +48,10 @@ INSERT INTO `mst_detail_menu` (`id`, `id_menu`, `slug_url`, `title`, `status`, `
 (7, '7', 'master/users', 'Users', '2', NULL, '1'),
 (8, '7', 'master/jabatan', 'Jabatan', '2', NULL, '1'),
 (10, '7', 'master/role', 'Role', '2', NULL, '1'),
-(13, '17', 'laporan/Kegiatan', 'Laporan Kegiatan', '2', NULL, '1'),
-(14, '17', 'laporan/Pelanggaran', 'Laporan Pelanggaran', '2', NULL, '1'),
-(18, '14', 'transaksi/service/jadwal', 'Jadwal Service', '2', NULL, '1'),
-(19, '14', 'transaksi/service', 'Service Kendaraan', '2', NULL, '1,5'),
-(21, '17', 'laporan/Tugas', 'Laporan Surat Tugas', '2', NULL, '1'),
-(22, '17', 'laporan/Pelanggaran/rekap', 'Laporan Rekap Pelanggaran', '2', NULL, '1');
+(13, '17', 'laporan/Kegiatan', 'Laporan Kegiatan', '2', NULL, '1,2,3,4'),
+(14, '17', 'laporan/Pelanggaran', 'Laporan Pelanggaran', '2', NULL, '1,2,3,4'),
+(21, '17', 'laporan/Tugas', 'Laporan Surat Tugas', '2', NULL, '1,2,3,4'),
+(22, '17', 'laporan/Pelanggaran/rekap', 'Laporan Rekap Pelanggaran', '2', NULL, '1,2,3,4');
 
 -- --------------------------------------------------------
 
@@ -72,14 +70,7 @@ CREATE TABLE `mst_jabatan` (
 
 INSERT INTO `mst_jabatan` (`id_jabatan`, `nm_jabatan`) VALUES
 (1, 'Admin'),
-(2, 'Perwira Tinggi'),
-(3, 'Perwira Menengah'),
-(4, 'Perwira Pertama'),
-(5, 'Perwira Pertama'),
-(6, 'Bintara Tinggi'),
-(7, 'Bintara'),
-(8, 'Tamtama Kepala'),
-(9, 'Tamtama');
+(9, 'Anggota');
 
 -- --------------------------------------------------------
 
@@ -164,12 +155,12 @@ CREATE TABLE `mst_menu` (
 --
 
 INSERT INTO `mst_menu` (`id`, `slug_url`, `title`, `status`, `icon`, `role`) VALUES
-(1, 'transaksi/tugas', 'Surat Tugas', 2, 'fa fa-files-o', '1,4,2'),
-(2, 'transaksi/kegiatan', 'Kegiatan', 2, 'fa fa-desktop', '1,4,2'),
-(3, 'transaksi/pelanggaran', 'Pelanggaran', 2, 'fa fa-cog', '1,4,2'),
+(1, 'transaksi/tugas', 'Surat Tugas', 2, 'fa fa-files-o', '1,2'),
+(2, 'transaksi/kegiatan', 'Kegiatan', 2, 'fa fa-desktop', '1,3,4'),
+(3, 'transaksi/pelanggaran', 'Pelanggaran', 2, 'fa fa-cog', '1,3,4'),
 (7, '#', 'Master', 2, 'fa fa-database', '1'),
-(17, '#', 'Laporan', 2, 'fa fa-file', '1,2,5'),
-(18, 'login/auth/doLogout', 'Logout', 2, 'fa fa-trash', '1,4,2,5');
+(17, '#', 'Laporan', 2, 'fa fa-file', '1,2,3,4'),
+(18, 'login/auth/doLogout', 'Logout', 2, 'fa fa-trash', '1,4,5');
 
 -- --------------------------------------------------------
 
@@ -230,10 +221,9 @@ CREATE TABLE `mst_role` (
 
 INSERT INTO `mst_role` (`id_role`, `nm_role`) VALUES
 (1, 'Admin'),
-(2, 'Staff'),
-(3, 'Pegawai'),
-(4, 'Supir'),
-(5, 'Mekanik');
+(2, 'Camat'),
+(3, 'Personil satpol PP'),
+(4, 'Kasi Trantib');
 
 -- --------------------------------------------------------
 
@@ -322,14 +312,10 @@ CREATE TABLE `mst_users` (
 --
 
 INSERT INTO `mst_users` (`id_user`, `nama`, `username`, `password`, `nip`, `id_jabatan`, `status`, `id_role`, `alamat`) VALUES
-(6, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1231', 3, '1', 1, 'jakarta'),
-(7, 'supir', 'supir', '21232f297a57a5a743894a0e4a801fc3', '1231', 3, '1', 4, 'jakarta'),
-(8, 'staff', 'staff', '21232f297a57a5a743894a0e4a801fc3', '1231', 3, '1', 2, 'jakarta'),
-(9, 'pegawai', 'pegawai', '21232f297a57a5a743894a0e4a801fc3', '1231', 3, '1', 3, 'jakarta'),
-(10, 'pegawai1', 'pegawai1', '21232f297a57a5a743894a0e4a801fc3', '1231', 3, '1', 3, 'jakarta'),
-(11, 'supir1', 'supir1', '21232f297a57a5a743894a0e4a801fc3', '1231', 3, '1', 4, 'jakarta'),
-(12, 'mekanik', 'mekanik', '21232f297a57a5a743894a0e4a801fc3', '1231', 3, '1', 5, 'jakarta'),
-(13, 'supir3', 'supir3', '21232f297a57a5a743894a0e4a801fc3', '468486', 9, '1', 4, '123');
+(6, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', '1231', 1, '1', 1, 'jakarta'),
+(7, 'Petugas Camat', 'camat', '21232f297a57a5a743894a0e4a801fc3', '1231', 9, '1', 2, 'jakarta'),
+(8, 'Petugas Personil satpol PP', 'satpol', '21232f297a57a5a743894a0e4a801fc3', '1231', 9, '1', 3, 'jakarta'),
+(9, 'Petugas Kasi Trantib', 'kasi', '21232f297a57a5a743894a0e4a801fc3', '1231', 9, '1', 4, 'jakarta');
 
 -- --------------------------------------------------------
 
@@ -448,7 +434,11 @@ INSERT INTO `tx_kegiatan` (`id_kegiatan`, `tanggal_kegiatan`, `id_surat_tugas`, 
 (1, '2022-04-30 07:02:58', 1, 'Operasi Zebra', 'Jakarta', 'Segera', NULL, '2022-04-30 07:02:58'),
 (2, '2022-04-30 07:02:58', 10, 'Operasi Covid', 'Jakarta', 'bersih2', NULL, '2022-04-30 07:02:58'),
 (4, '2022-05-06 00:00:00', 10, 'test12332', 'test123123', 'coba', '3_-Surat-Dinas-Sekolah.jpg', '2022-05-05 00:47:54'),
-(5, '2022-05-06 00:00:00', 10, 'test001', 'test001', 'test001', 'surat_test.jpg', '2022-05-05 01:03:19');
+(5, '2022-05-06 00:00:00', 10, 'test001', 'test001', 'test001', 'surat_test.jpg', '2022-05-05 01:03:19'),
+(6, '2022-05-09 00:00:00', 9, 'razia masker', 'jakarta', 'denda', 'surat_test1.jpg', '2022-05-08 15:19:56'),
+(7, '2022-05-14 00:00:00', 10, 'test', 'test', '', 'surat_test2.jpg', '2022-05-14 15:11:02'),
+(8, '2022-05-14 00:00:00', 10, 'test', 'test', '<p>Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s</p>\r\n', 'surat_test3.jpg', '2022-05-14 15:12:36'),
+(9, '2022-06-06 00:00:00', 10, '123', '123213', '<p>2222</p>\r\n', NULL, '2022-06-05 11:56:03');
 
 -- --------------------------------------------------------
 
@@ -473,7 +463,7 @@ CREATE TABLE `tx_kordinat` (
 INSERT INTO `tx_kordinat` (`id_kordinat`, `id_sewa`, `status_perjalanan`, `lat_kordinat`, `lon_kordinat`, `last_update`, `counter`) VALUES
 (1, 20, 1, '-6.1940851', '106.8616141', '2020-10-07 04:14:43', 22),
 (2, 27, 1, '-6.132874', '106.980442', '2020-10-07 01:27:37', 12),
-(6, 32, 1, '-6.2087634', '106.84559899999999', '2020-11-08 05:54:22', 115),
+(6, 32, 1, '-6.291456', '106.4239104', '2022-06-19 02:39:29', 141),
 (9, 33, 1, '-6.2783488', '106.8662784', '2020-10-28 03:19:31', 953),
 (10, 37, 0, NULL, NULL, NULL, NULL),
 (11, 38, 0, NULL, NULL, NULL, NULL),
@@ -510,8 +500,10 @@ INSERT INTO `tx_pelanggaran` (`id_pelanggaran`, `id_kegiatan`, `no_ktp`, `nama`,
 (1, 1, 'test', 'test', 'test', 'test', 'test', '1', '1', 1, 'test', '2022-04-30', '2022-04-30 05:43:29'),
 (2, 1, '156846896846846878448', 'Agus', 'Jakarta', 'SD', '-', '0', '1', 3, 'lampu merah sunter', '2022-04-30', '2022-04-30 05:53:10'),
 (3, 1, '12381367712637126 test edit', 'Surya test edit', 'bogor test edit', 'SMA test edit', '-', '1', '1', 4, 'jalan raya bogor test edit', '2022-04-30', '2022-04-30 06:02:04'),
-(4, 2, '155489999', 'Arif', 'jakarta', 'SD', '-', '1', '1', 4, 'jalan lurus', '2022-04-29', '2022-04-30 07:44:45'),
-(5, 5, '123213123', 'ddd', 'dddd', 'dddd', 'dddd', '0', '2', 5, 'dddd', '2022-05-28', '2022-05-04 18:56:46');
+(4, 2, '155489999', 'Arif', 'jakarta', 'SD', '-', '1', '3', 4, 'jalan lurus', '2022-04-29', '2022-04-30 07:44:45'),
+(5, 5, '123213123', 'ddd', 'dddd', 'dddd', 'dddd', '0', '2', 5, 'dddd', '2022-05-28', '2022-05-04 18:56:46'),
+(6, 6, '68786868778888', 'Agus', 'jakarta', 'S1', '-', '1', '1', 2, 'jakrta', '2022-05-08', '2022-05-08 08:21:32'),
+(7, 5, '123123', '12312', '3123123', '123123', '123123', '0', '2', 3, '123123', '2022-06-05', '2022-06-05 04:57:45');
 
 -- --------------------------------------------------------
 
@@ -632,7 +624,9 @@ INSERT INTO `tx_surat_tugas` (`id_surat_tugas`, `nomor_surat_tugas`, `dasar_kegi
 (7, '005/AA/BB', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n\n<p>&nbsp;</p>\n\n<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n', '[\"6\"]', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n\n<p>&nbsp;</p>\n\n<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n', 1, '2022-04-24 08:46:54', NULL),
 (8, '006/AA/BB', '<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>\n', '[\"13\",\"12\",\"11\",\"10\",\"9\",\"8\",\"7\",\"6\"]', '<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>\n', 1, '2022-04-29 22:53:29', NULL),
 (9, '007/AA/BB', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n\n<p>&nbsp;</p>\n\n<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n', '[\"13\",\"12\",\"11\",\"10\",\"9\",\"8\",\"7\",\"6\"]', '<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n\n<p>&nbsp;</p>\n\n<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\n', 1, '2022-04-30 00:18:00', '2022-04-30 00:21:25'),
-(10, 'TEST/001/A01', '<p>test ketik</p>\n', '[\"10\",\"9\"]', '<p>test ketik</p>\n', 1, '2022-04-30 07:40:29', NULL);
+(10, 'TEST/001/A01', '<p>1.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n2.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n3.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n4.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n5.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n6.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n7.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n8.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n9.Contrary to popular belief, Lorem Ipsum is not simply random text.</p>\n', '[\"13\",\"12\",\"11\",\"10\",\"9\",\"8\",\"7\",\"6\"]', '<p>1.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n2.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n3.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n4.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n5.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n6.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n7.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n8.Contrary to popular belief, Lorem Ipsum is not simply random text.<br />\n9.Contrary to popular belief, Lorem Ipsum is not simply random text.</p>\n', 1, '2022-04-30 07:40:29', '2022-05-06 09:19:58'),
+(11, '123', '<p>123</p>\n', '[\"6\"]', '<p>123</p>\n', 0, '2022-06-05 04:45:08', NULL),
+(12, '12312', '<p>2323</p>\n', '[\"11\"]', '<p>3232</p>\n', 0, '2022-06-05 04:51:02', NULL);
 
 --
 -- Indexes for dumped tables
@@ -850,7 +844,7 @@ ALTER TABLE `tx_jadwal_service`
 -- AUTO_INCREMENT for table `tx_kegiatan`
 --
 ALTER TABLE `tx_kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tx_kordinat`
@@ -862,7 +856,7 @@ ALTER TABLE `tx_kordinat`
 -- AUTO_INCREMENT for table `tx_pelanggaran`
 --
 ALTER TABLE `tx_pelanggaran`
-  MODIFY `id_pelanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pelanggaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tx_pengembalian`
@@ -880,7 +874,7 @@ ALTER TABLE `tx_sewa`
 -- AUTO_INCREMENT for table `tx_surat_tugas`
 --
 ALTER TABLE `tx_surat_tugas`
-  MODIFY `id_surat_tugas` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_surat_tugas` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
