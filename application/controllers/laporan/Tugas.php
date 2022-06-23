@@ -30,6 +30,14 @@ class Tugas extends CI_Controller {
 		$result = $this->transaksi_model->getReportTugas($data);
         $content = "";
 		foreach ($result as $key => $value) {
+			
+			$users_data = $this->transaksi_model->getUserInId(json_decode($value->id_user));
+			$user_view = "";
+			foreach ($users_data as $keyx => $valuex) {
+				$user_view .= $valuex->nama.' </br>';
+			}
+			$users_view = rtrim($user_view,'</br>');
+
 			$no = $key+1;
             $is_active = $value->is_active == 1 ? 'Aktif' : 'Non Aktif';
 			$content .= "
@@ -37,6 +45,7 @@ class Tugas extends CI_Controller {
 				<td>$no</td>
 				<td>$value->nomor_surat_tugas</td>
 				<td>$value->dasar_kegiatan</td>
+				<td>$users_view</td>
 				<td>$value->tujuan_kegiatan</td>
                 <td>$value->waktu_rekam</td>
 				<td>$is_active</td>
@@ -54,6 +63,7 @@ class Tugas extends CI_Controller {
                 <th>No</th>
                 <th>Nomor Surat Tugas</th>
                 <th>Dasar Kegiatan</th>
+				<td>Anggota</th>
                 <th>Tujuan Kegiatan</th>
                 <th>Waktu Rekam</th>
                 <th>Is Aktive</th>

@@ -718,6 +718,7 @@ class Transaksi_model extends CI_Model {
 		a.tujuan_kegiatan as tujuan_kegiatan_full,
 		CONCAT(SUBSTR(tujuan_kegiatan, 1, 50),'......') AS tujuan_kegiatan,
 		a.is_active ,
+		a.id_user,
 		a.waktu_rekam ,
 		a.waktu_update ,
 		a.id_user
