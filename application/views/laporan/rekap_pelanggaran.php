@@ -83,8 +83,8 @@ $CI = &get_instance();
             <table cellpadding="2" cellspacing="2" border="0" width="100%" style="text-align: center;font-weight: bold;">
                   <tr>
                     <td width="35%">KEPALA SATUAN POLISI PRAMONG PRAJA</td>
-                    <td>KABID P3D</td>
-                    <td>PADANG 30 DESEMBER 2022</td>
+                    <td>&nbsp;</td>
+                    <td width="35%">PADANG 30 DESEMBER 2022</td>
                   <tr>
                   <tr>
                     <td>KOTA PADANG</td>
@@ -113,12 +113,12 @@ $CI = &get_instance();
                   <tr>
                   <tr>
                     <td>PETUGAS 1</td>
-                    <td>PETUGAS 2</td>
+                    <td>&nbsp;</td>
                     <td>PETUGAS 3</td>
                   <tr>
                   <tr>
                     <td>NIPP : 12312381724516235</td>
-                    <td>NIPP : 22312381724516235</td>
+                    <td>&nbsp;</td>
                     <td>NIPP : 32312381724516235</td>
                   <tr>
             </table>

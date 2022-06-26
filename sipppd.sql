@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 09:43 PM
+-- Generation Time: Jun 26, 2022 at 03:44 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -51,7 +51,8 @@ INSERT INTO `mst_detail_menu` (`id`, `id_menu`, `slug_url`, `title`, `status`, `
 (13, '17', 'laporan/Kegiatan', 'Laporan Kegiatan', '2', NULL, '1,2,3,4'),
 (14, '17', 'laporan/Pelanggaran', 'Laporan Pelanggaran', '2', NULL, '1,2,3,4'),
 (21, '17', 'laporan/Tugas', 'Laporan Surat Tugas', '2', NULL, '1,2,3,4'),
-(22, '17', 'laporan/Pelanggaran/rekap', 'Laporan Rekap Pelanggaran', '2', NULL, '1,2,3,4');
+(22, '17', 'laporan/Pelanggaran/rekap', 'Laporan Rekap Pelanggaran', '2', NULL, '1,2,3,4'),
+(23, '17', 'laporan/Users', 'Laporan User', '2', NULL, '1');
 
 -- --------------------------------------------------------
 
@@ -802,7 +803,7 @@ ALTER TABLE `mst_pelanggaran`
 -- AUTO_INCREMENT for table `mst_role`
 --
 ALTER TABLE `mst_role`
-  MODIFY `id_role` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_role` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `mst_tindakan`
@@ -820,7 +821,7 @@ ALTER TABLE `mst_tipe`
 -- AUTO_INCREMENT for table `mst_users`
 --
 ALTER TABLE `mst_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tx_dtl_service`
