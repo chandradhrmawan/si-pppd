@@ -691,7 +691,7 @@ class Transaksi_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
-	public function getDataTugas()
+	public function getDataTugas($isActive="",$idUser="6")
 	{
 		$this->db->select("a.id_surat_tugas ,
 		a.nomor_surat_tugas,
@@ -705,6 +705,13 @@ class Transaksi_model extends CI_Model {
 		a.id_user
 		");
 		$this->db->from("tx_surat_tugas a");
+		if($idUser != "6"){
+			$this->db->like("a.id_user",$idUser);
+		}
+
+		if($isActive != ""){
+			$this->db->where("a.is_active",$isActive);
+		}
 		$this->db->order_by("a.waktu_rekam","desc");
 		return $this->db->get()->result();
 	}

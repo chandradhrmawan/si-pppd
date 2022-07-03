@@ -22,7 +22,7 @@ class Kegiatan extends CI_Controller {
 		$data['data_user_json']		= json_encode($data['data_user']);
 		$data['data_kegiatan'] 		= $this->transaksi_model->getDataKegiatan();
 		$data['data_kegiatan_json']	= json_encode($data['data_kegiatan']);
-		$data['data_tugas'] 		= $this->transaksi_model->getDataTugas();
+		$data['data_tugas'] 		= $this->transaksi_model->getDataTugas('1',$_SESSION['id_user']);
 		foreach ($data['data_tugas'] as $key => $value) {
 			$data['data_tugas'][$key]->data_users = ($this->_getUsersInId(json_decode($value->id_user)));
 		}
