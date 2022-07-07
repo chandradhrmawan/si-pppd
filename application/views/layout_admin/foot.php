@@ -65,24 +65,24 @@
 
     }, 5000);
 
-    // function updateLoc(id_user)
-    // {
-    //   let lon = $('#lon_hid').val()
-    //   let lat = $('#lat_hid').val()
+    function updateLoc(id_user)
+    {
+      let lon = $('#lon_hid').val()
+      let lat = $('#lat_hid').val()
 
-    //   $.ajax({
-    //     url: '<?=base_url()?>transaksi/Monitoring/updateLoc/'+id_user,
-    //     method: 'POST',
-    //     data:{"lon":lon,"lat":lat},
-    //     dataType: "JSON",
-    //     success: function(response) {
-    //      console.log(response)
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown){
-    //       alert('Error adding / update data');
-    //     }
-    //   });
-    // }
+      $.ajax({
+        url: '<?=base_url()?>transaksi/Monitoring/updateLoc/'+id_user,
+        method: 'POST',
+        data:{"lon":lon,"lat":lat},
+        dataType: "JSON",
+        success: function(response) {
+         console.log(response)
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+          alert('Error adding / update data');
+        }
+      });
+    }
 
 
     function getGeoLocation(){
