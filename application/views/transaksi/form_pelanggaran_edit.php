@@ -135,6 +135,7 @@
             perkerjaan : document.getElementById('perkerjaan').value,
             status_kawin : document.getElementById('status_kawin').value,
             jenis_pelanggaran : document.getElementById('jenis_pelanggaran').value,
+            kd_tindakan : document.getElementById('kd_tindakan').value,
             tanggal_pelanggaran : document.getElementById('tanggal_pelanggaran').value,
             lokasi : document.getElementById('lokasi').value
         }

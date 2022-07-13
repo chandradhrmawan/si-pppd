@@ -30,7 +30,10 @@ $CI = &get_instance();
             </tr>
             <tr >
                 <?php foreach ($ref_tindakan as $key => $value) { ?>
-                <th><?=$value->nm_tindakan?></th>
+                <th>
+                  <!-- <?=debux($value->kd_tindakan)?> -->
+                  <?=$value->nm_tindakan?>
+                </th>
                 <?php } ?>
             </tr>
             </thead> 
@@ -43,7 +46,10 @@ $CI = &get_instance();
               ?>
                 <tr>
                   <td><?=$key+1?></td>
-                  <td><?=$value->nm_pelanggaran?></td>
+                  <td>
+                    <!-- <?=debux($value->kd_pelanggaran)?> -->
+                    <?=$value->nm_pelanggaran?>
+                  </td>
                   <?php 
                   for ($i=1; $i <=12; $i++) { 
                   ?>

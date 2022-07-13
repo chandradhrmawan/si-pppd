@@ -992,7 +992,7 @@ class Transaksi_model extends CI_Model {
 		and jenis_pelanggaran = "'.$kd_pelanggaran.'"')->row();
 	}
 
-	public function getByTindakan($id_kegiatan,$kd_tindakan)
+	public function getByTindakan($kd_pelanggaran,$kd_tindakan,$tahun="2022")
 	{
 		return $this->db->query('select
 			COUNT(*) as jml
@@ -1001,7 +1001,9 @@ class Transaksi_model extends CI_Model {
 		where
 			kd_tindakan = "'.$kd_tindakan.'"
 			and
-			id_kegiatan  = "'.$id_kegiatan.'"')->row();
+			jenis_pelanggaran  = "'.$kd_pelanggaran.'"
+			and
+			year(tanggal_pelanggaran) = "'.$tahun.'"')->row();
 	}
 	
 	public function getTotalBulan($bulan,$tahun)
